@@ -2,7 +2,6 @@
   "name": "googlebooks3",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://fosfaine.github.io/GoogleBooks3/",
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -13,8 +12,6 @@
     "react-scripts": "4.0.3"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
