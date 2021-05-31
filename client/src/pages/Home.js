@@ -8,6 +8,7 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List } from "../components/List";
 
+// Not using hooks here which would require functional "dumb" components; using extends Component from React, which requires a render() and return() and declaring state/using this.state all the time. Don't need componentDidMount because it's all wrapped between the Switch statements under Nav? And, handleInput Change sets new state?
 class Home extends Component {
     State = {
         books: [],
@@ -17,9 +18,13 @@ class Home extends Component {
 
     render () {
         return (
+          // These components come from the Grid component that esports several functions that only set classNames for css purposes
             <Container>
+              {/* These components come from the Grid component that esports several functions that only set classNames for css purposes */}
               <Row>
+                {/* These components come from the Grid component that esports several functions that only set classNames for css purposes */}
                 <Col size="md-12">
+                  {/* This is just text in a Jumbotron styling format like a bootstrap shortcut! */}
                   <Jumbotron>
                     <h1 className="text-center">
                       <strong>(React) Google Books Search</strong>
@@ -28,7 +33,9 @@ class Home extends Component {
                   </Jumbotron>
                 </Col>
                 <Col size="md-12">
+                  {/* This is a component with props (icon, title, and "children" being the Form component) being passed into the Form to be used in the input fields*/}
                   <Card title="Book Search" icon="far fa-book">
+                    {/* This is a component with props (handleInputChange, handleFormSubmit, and q) being passed into the Form to be used in the input fields*/}
                     <Form
                       handleInputChange={this.handleInputChange}
                       handleFormSubmit={this.handleFormSubmit}
@@ -39,10 +46,13 @@ class Home extends Component {
               </Row>
               <Row>
                 <Col size="md-12">
+                  {/* This is a component with props (icon, title, and "children" being the List and Book component) with their own props being passes in!*/}
                   <Card title="Results">
                     {this.state.books.length ? (
+                    // {/* This is a component with props ("children" being Book component) with their own props being passes in! It maps through it's cbild component, Book, redner one Book component for each index held in the book array in state!*/}
                       <List>
                         {this.state.books.map(book => (
+                        // {/* This is a component with props (details held in the book array in state for each book) being passed into the Form to be used to render the ListItem child component within Book*/}
                           <Book
                             key={book.id}
                             title={book.volumeInfo.title}
@@ -68,6 +78,7 @@ class Home extends Component {
                   </Card>
                 </Col>
               </Row>
+              {/* This is just a component for styling format like a bootstrap shortcut! */}
               <Footer />
             </Container>
           );
