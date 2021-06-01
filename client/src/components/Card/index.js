@@ -11,6 +11,7 @@ function Card({ icon, title, children }) {
           </strong>
         </h3>
       </div>
+      {/* The "children" is the Form component, which will love within this div! That's handy! */}å
       <div className="card-body">{children}</div>
     </div>
   );
