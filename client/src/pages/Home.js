@@ -10,10 +10,51 @@ import { List } from "../components/List";
 
 // Not using hooks here which would require functional "dumb" components; using extends Component from React, which requires a render() and return() and declaring state/using this.state all the time. Don't need componentDidMount because it's all wrapped between the Switch statements under Nav? And, handleInput Change sets new state?
 class Home extends Component {
-    State = {
+    state = {
         books: [],
         q: "",
         message: "Search For A Book To Begin!"
+    };
+
+    handleInputChange = event => {
+      const { name, value } = event.target;
+      this.setState({
+        [name]: value
+      });
+    };
+
+    getBooks = () => {
+      API.getBooks(this.state.q)
+        .then(res =>
+          this.setState({
+            books: res.data
+          })
+        )
+        .catch(() =>
+          this.setState({
+            books: [],
+            message: "No New Books Found, Try a Different Query"
+          })
+        );
+    };
+
+    handleFormSubmit = event => {
+      event.preventDefault();
+      this.getBooks();
+    };
+
+    handleBookSave = id => {
+      const book = this.state.books.find(book => book.id === id);
+  
+      API.saveBook({
+        googleId: book.id,
+        title: book.volumeInfo.title,
+        subtitle: book.volumeInfo.subtitle,
+        link: book.volumeInfo.infoLink,
+        authors: book.volumeInfo.authors,
+        description: book.volumeInfo.description,
+        image: book.volumeInfo.imageLinks.thumbnail
+      }).then(() => this.getBooks());
     };
 
     render () {
